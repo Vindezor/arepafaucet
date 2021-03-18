@@ -3,7 +3,74 @@ body{
     background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-
 .p-5{
     border-radius: 5px;
+}
+.form_input_error{
+    font-size: 14.5px;
+    margin-bottom: 0;
+    display: none;
+}
+.form_input_error-activo{
+    display: block;
+}
+.form_pos{
+    position: relative;
+    margin-top: 15px;
+}
+.val_estado{
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    z-index: 100;
+    font-size: 16px;
+    opacity: 0;
+}
+.formulario_mensaje{
+    height: 45px;
+    line-height: 45px;
+    background: #F66060;
+    padding: 0 15px;
+    border-radius: 3px;
+    font-size: 12px;
+    display: none;
+}
+.formulario_mensaje p{
+    margin: 0;
+}
+.formulario_mensaje-activo{
+    display: block;
+}
+.formulario_exitoso{
+    color: #119200;
+    display: none;
+}
+.formulario_exitoso-activo{
+    display: block;
+}
+.form_pos-correcto .val_estado{
+    color: #1ed12d;
+    opacity: 1;
+}
+.form_pos-incorrecto .form-label{
+    color: #bb2929;
+}
+.form_pos-incorrecto .val_estado{
+    color: #bb2929;
+    opacity: 1;
+}
+.form_pos-incorrecto .form-control{
+    border: 3px solid #bb2929;
+}
+.form-check{
+    margin-top: 15px;
+}
+.btn_reg{
+    margin-top: 15px;
+}
+.form-check-label-error{
+    color:#bb2929;
+}
+.form_check-incorrecto .form-check-input{
+    border: 3px solid #bb2929;
 }

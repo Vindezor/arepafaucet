@@ -2,29 +2,54 @@
 
 {% block content %}
 
-<form class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3">
+<form class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3" id="formulario">
     <h1>Registro</h1>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">Nunca compartiremos tu correo con nadie.</div>
+    <!--CORREO ELECTRONICO-->
+    <div class="form_pos" id="grup_email">
+        <label for="val_email" class="form-label">Correo Electrónico</label>
+        <div class="form_input">
+            <input type="text" class="form-control" name="val_email" id="val_email" placeholder="ejemplo@correo.com">
+            <i class="val_estado fas fa-times"></i>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+    <p class="form_input_error" id="error_email">Introduzca un correo válido.</p>
+    <!--CONTRASEÑA-->
+    <div class="form_pos" id="grup_password">
+        <label for="val_password" class="form-label">Contraseña</label>
+        <div class="form_input">
+            <input type="password" class="form-control" name="val_password" id="val_password" placeholder="Introduzca su contraseña">
+            <i class="val_estado fas fa-times"></i>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Confirmar contraseña</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-        <div id="emailHelp" class="form-text">Introduce la misma contraseña</div>
+    <p class="form_input_error" id="error_password">Introduzca una contraseña de 4 a 12 caractéres.</p>
+    <!--CONFIRMAR CONTRASEÑA-->
+    <div class="form_pos" id="grup_conf_password">
+        <label for="val_conf_password" class="form-label">Confirmar Contraseña</label>
+        <div class="form_input">
+            <input type="password" class="form-control" name="val_conf_password" id="val_conf_password" placeholder="Repita su contraseña">
+            <i class="val_estado fas fa-times"></i>
+        </div>
     </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Prueba que eres humano
+    <p class="form_input_error" id="error_conf_password">La contraseña tiene que ser igual a la anterior.</p>
+    <!--ACEPTO DE TERMINOS-->
+    <div class="form-check" id="grup_terminos">
+        <label class="form-check-label" for="exampleCheck1">
+            <input type="checkbox" class="form-check-input" id="val_terminos" name="val_terminos">
+            Acepto los términos y condiciones
         </label>
     </div>
-    <button type="submit" class="btn btn-primary">Registrarse</button>
+    <!--ERROR FORMULARIO-->
+    <div class="formulario_mensaje" id="formulario_mensaje">
+        <p><i class="fas fa-exclamation-triangle"></i> <b>Formulario incompleto.</b></p>
+
+    </div>
+    <!--ENVIAR FORMULARIO-->
+    <button type="submit" class="btn btn-primary btn_reg">Registrarse</button>
+    <p class="formulario_exitoso" id="formulario_exitoso"><b>Registro exitoso:</b> Porfavor, revise su correo.</p>
     <hr class="my-4">
     <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
 </form>
+<!--SCRIPT VALIDAR FORMULARIO-->
+<script src="{{ url_for('static', filename='formulariosc.js') }}" type="text/javascript"></script>
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 {% endblock %}
