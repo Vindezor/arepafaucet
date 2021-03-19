@@ -91,16 +91,6 @@ formulario.addEventListener('submit', (e) => {
         }, 3000)
     }
     else{
-        if(terminos.checked == false){
-            document.getElementById('grup_terminos').classList.add('form-check-label-error');
-            document.getElementById('grup_terminos').classList.add('form_check-incorrecto');
-        }
-        document.querySelector('#grup_email i').classList.remove('fa-check');
-        document.querySelector('#grup_email i').classList.remove('fa-times');
-        document.querySelector('#grup_password i').classList.remove('fa-check');
-        document.querySelector('#grup_password i').classList.remove('fa-times');
-        document.getElementById('grup_email').classList.add('form_pos-incorrecto');
-        document.getElementById('grup_password').classList.add('form_pos-incorrecto');
         document.getElementById('formulario_mensaje').classList.add('formulario_mensaje-activo');
         setTimeout(() => {
             document.getElementById('formulario_mensaje').classList.remove('formulario_mensaje-activo');
