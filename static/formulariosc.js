@@ -84,8 +84,6 @@ formulario.addEventListener('submit', (e) => {
         document.getElementById('grup_password').classList.remove('form_pos-correcto');
         document.getElementById('grup_conf_password').classList.remove('form_pos-correcto');
         document.getElementById('formulario_exitoso').classList.add('formulario_exitoso-activo');
-        document.getElementById('grup_terminos').classList.remove('form-check-label-error');
-        document.getElementById('grup_terminos').classList.remove('form_check-incorrecto');
         setTimeout(() => {
             document.getElementById('formulario_exitoso').classList.remove('formulario_exitoso-activo');
         }, 3000)

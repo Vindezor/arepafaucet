@@ -68,9 +68,3 @@ body{
 .btn_reg{
     margin-top: 15px;
 }
-.form-check-label-error{
-    color:#bb2929;
-}
-.form_check-incorrecto .form-check-input{
-    border: 3px solid #bb2929;
-}
