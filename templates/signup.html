@@ -1,15 +1,16 @@
 {% extends "layout.html" %}
 
+{% block title %} Sign Up - Arepa Faucet {% endblock %}
+
 {% block content %}
 
-<form class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3" id="formulario">
+<form action="/signup" method="POST" class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3" id="formulario">
     <h1>Registro</h1>
     <!--CORREO ELECTRONICO-->
     <div class="form_pos" id="grup_email">
         <label for="val_email" class="form-label">Correo Electrónico</label>
         <div class="form_input">
             <input type="text" class="form-control" name="val_email" id="val_email" placeholder="ejemplo@correo.com">
-            <i class="val_estado fas fa-times"></i>
         </div>
     </div>
     <p class="form_input_error" id="error_email">Introduzca un correo válido.</p>
@@ -18,7 +19,7 @@
         <label for="val_password" class="form-label">Contraseña</label>
         <div class="form_input">
             <input type="password" class="form-control" name="val_password" id="val_password" placeholder="Introduzca su contraseña">
-            <i class="val_estado fas fa-times"></i>
+
         </div>
     </div>
     <p class="form_input_error" id="error_password">Introduzca una contraseña de 4 a 12 caractéres.</p>
@@ -27,7 +28,6 @@
         <label for="val_conf_password" class="form-label">Confirmar Contraseña</label>
         <div class="form_input">
             <input type="password" class="form-control" name="val_conf_password" id="val_conf_password" placeholder="Repita su contraseña">
-            <i class="val_estado fas fa-times"></i>
         </div>
     </div>
     <p class="form_input_error" id="error_conf_password">La contraseña tiene que ser igual a la anterior.</p>
@@ -45,7 +45,11 @@
     </div>
     <!--ENVIAR FORMULARIO-->
     <button type="submit" class="btn btn-primary btn_reg">Registrarse</button>
-    <p class="formulario_exitoso" id="formulario_exitoso"><b>Registro exitoso:</b> Porfavor, revise su correo.</p>
+    {% if session['signup_fail'] %}
+    <p class="form_pos form_log-incorrecto"><strong>Error: Ya se encuentra registrado</strong></p>
+    {% else %}
+    <!--NADA-->
+    {% endif %}
     <hr class="my-4">
     <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
 </form>

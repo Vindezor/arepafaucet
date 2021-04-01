@@ -18,14 +18,6 @@ body{
     position: relative;
     margin-top: 15px;
 }
-.val_estado{
-    position: absolute;
-    right: 15px;
-    bottom: 10px;
-    z-index: 100;
-    font-size: 16px;
-    opacity: 0;
-}
 .formulario_mensaje{
     height: 45px;
     line-height: 45px;
@@ -41,23 +33,8 @@ body{
 .formulario_mensaje-activo{
     display: block;
 }
-.formulario_exitoso{
-    color: #119200;
-    display: none;
-}
-.formulario_exitoso-activo{
-    display: block;
-}
-.form_pos-correcto .val_estado{
-    color: #1ed12d;
-    opacity: 1;
-}
 .form_pos-incorrecto .form-label{
     color: #bb2929;
-}
-.form_pos-incorrecto .val_estado{
-    color: #bb2929;
-    opacity: 1;
 }
 .form_pos-incorrecto .form-control{
     border: 3px solid #bb2929;
@@ -67,4 +44,13 @@ body{
 }
 .btn_reg{
     margin-top: 15px;
+}
+.form_pos-incorrecto .form-check-label{
+    color: #bb2929;
+}
+.form_pos-incorrecto .form-check-input{
+    border: 3px solid #bb2929;
+}
+.form_log-incorrecto{
+    color: #bb2929;
 }

@@ -1,25 +1,44 @@
 {% extends "layout.html" %}
 
+{% block title %} Login - Arepa Faucet {% endblock %}
+
 {% block content %}
 
-<form class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3 redond">
+<form action="/login" method="POST" class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3 redond" id="formulario">
     <h1>Inicio de sesión</h1>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">Nunca compartiremos tu correo con nadie.</div>
+    <!--CORREO ELECTRONICO-->
+    <div class="form_pos" id="grup_email">
+        <label for="valog_email" class="form-label">Correo electrónico</label>
+        <input type="text" class="form-control" name ="valog_email" id="valog_email" aria-describedby="emailHelp" placeholder="Ingresa tu correo electrónico">
     </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+    <!--CONTRASEÑA-->
+    <div class="form_pos" id="grup_password">
+        <label for="valog_password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" name="valog_password" id="valog_password" placeholder="Ingresa tu contraseña">
     </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Prueba que eres humano
+    <!--CONFIRMACION DE HUMANO-->
+    <div class="form-check" id="grup_terminos">
+        <label class="form-check-label" for="exampleCheck1">
+            <input type="checkbox" class="form-check-input" id="val_terminos" name="val_terminos">
+            Prueba que eres humano
         </label>
     </div>
-    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    <!--ERROR FORMULARIO-->
+    <div class="formulario_mensaje" id="formulario_mensaje">
+        <p><i class="fas fa-exclamation-triangle"></i> <b>Formulario incompleto.</b></p>
+    </div>
+    <!--ENVIAR FORMULARIO-->
+    <button type="submit" class="btn btn-primary btn_reg">Iniciar sesión</button>
+    {% if session['login_sux'] %}
+    <!--NADA-->
+    {% else %}
+    <p class="form_pos form_log-incorrecto"><strong>Introduzca un correo existente o una clave valida.</strong></p>
+    {% endif %}
     <hr class="my-4">
     <p>¿No tienes cuenta? <a href="/signup">Regístrate aquí</a></p>
 </form>
+<!--SCRIPT VALIDAR FORMULARIO-->
+<script src="{{ url_for('static', filename='loginformsc.js') }}" type="text/javascript"></script>
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+
 {% endblock %}

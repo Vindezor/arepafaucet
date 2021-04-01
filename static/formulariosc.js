@@ -32,17 +32,11 @@ const validarFormulario = (e) => {
 const validarCampo = (expresion, input, campo) => {
     if(expresion.test(input.value)){
         document.getElementById(`grup_${campo}`).classList.remove('form_pos-incorrecto');
-        document.getElementById(`grup_${campo}`).classList.add('form_pos-correcto');
-        document.querySelector(`#grup_${campo} i`).classList.remove('fa-times');
-        document.querySelector(`#grup_${campo} i`).classList.add('fa-check');
         document.getElementById(`error_${campo}`).classList.remove('form_input_error-activo');
         campos[campo] = true;
     }
     else{
-        document.getElementById(`grup_${campo}`).classList.remove('form_pos-correcto');
         document.getElementById(`grup_${campo}`).classList.add('form_pos-incorrecto');
-        document.querySelector(`#grup_${campo} i`).classList.remove('fa-check');
-        document.querySelector(`#grup_${campo} i`).classList.add('fa-times');
         document.getElementById(`error_${campo}`).classList.add('form_input_error-activo');
         campos[campo] = false;
     }
@@ -53,18 +47,12 @@ const validarConfPassword = () => {
     const inputPassword2 = document.getElementById('val_conf_password');
 
     if(inputPassword1.value !== inputPassword2.value){
-        document.getElementById('grup_conf_password').classList.remove('form_pos-correcto');
         document.getElementById('grup_conf_password').classList.add('form_pos-incorrecto');
-        document.querySelector('#grup_conf_password i').classList.remove('fa-check');
-        document.querySelector('#grup_conf_password i').classList.add('fa-times');
         document.getElementById('error_conf_password').classList.add('form_input_error-activo');
         campos['confPassword'] = false;
     }
     else{
         document.getElementById('grup_conf_password').classList.remove('form_pos-incorrecto');
-        document.getElementById('grup_conf_password').classList.add('form_pos-correcto');
-        document.querySelector('#grup_conf_password i').classList.remove('fa-times');
-        document.querySelector('#grup_conf_password i').classList.add('fa-check');
         document.getElementById('error_conf_password').classList.remove('form_input_error-activo');
         campos['confPassword'] = true;
     }
@@ -76,19 +64,34 @@ inputs.forEach((input) => {
 });
 
 formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
     const terminos = document.getElementById('val_terminos');
     if(campos.email && campos.password && campos.confPassword && terminos.checked){
-        formulario.reset();
-        document.getElementById('grup_email').classList.remove('form_pos-correcto');
-        document.getElementById('grup_password').classList.remove('form_pos-correcto');
-        document.getElementById('grup_conf_password').classList.remove('form_pos-correcto');
+        document.getElementById('grup_terminos').classList.remove('form_pos-incorrecto');
         document.getElementById('formulario_exitoso').classList.add('formulario_exitoso-activo');
         setTimeout(() => {
             document.getElementById('formulario_exitoso').classList.remove('formulario_exitoso-activo');
         }, 3000)
     }
     else{
+        e.preventDefault();
+        if(terminos.checked == false){
+            document.getElementById('grup_terminos').classList.add('form_pos-incorrecto');
+        }
+        else{
+            document.getElementById('grup_terminos').classList.remove('form_pos-incorrecto');
+        }
+        if(campos.email){
+            document.getElementById('grup_email').classList.remove('form_pos-incorrecto');
+        }
+        else{
+            document.getElementById('grup_email').classList.add('form_pos-incorrecto');
+        }
+        if(campos.password){
+            document.getElementById('grup_password').classList.remove('form_pos-incorrecto');
+        }
+        else{
+            document.getElementById('grup_password').classList.add('form_pos-incorrecto');
+        }
         document.getElementById('formulario_mensaje').classList.add('formulario_mensaje-activo');
         setTimeout(() => {
             document.getElementById('formulario_mensaje').classList.remove('formulario_mensaje-activo');
