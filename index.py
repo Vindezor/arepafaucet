@@ -1,17 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL, MySQLdb
 import bcrypt
+import os
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'sql5.freesqldatabase.com'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_USER'] = 'sql5402866'
-app.config['MYSQL_PASSWORD'] = 'AckWsIAK1f'
-app.config['MYSQL_DB'] = 'sql5402866'
+app.config['MYSQL_HOST'] = os.environ['HOSTENV_MYSQL']
+app.config['MYSQL_PORT'] = os.environ['PORTENV_MYSQL']
+app.config['MYSQL_USER'] = os.environ['USERENV_MYSQL']
+app.config['MYSQL_PASSWORD'] = os.environ['PASSENV_MYSQL']
+app.config['MYSQL_DB'] = os.environ['DBENV_MYSQL']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
-app.secret_key = "weros".encode('utf-8')
+app.secret_key = os.environ['weros']
 
 @app.route('/')
 def home():
@@ -90,4 +91,4 @@ def logout():
     return redirect(url_for("home"))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
