@@ -4,15 +4,15 @@ import bcrypt
 import os
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = os.environ['HOSTENV_MYSQL']
-app.config['MYSQL_PORT'] = os.environ['PORTENV_MYSQL']
-app.config['MYSQL_USER'] = os.environ['USERENV_MYSQL']
-app.config['MYSQL_PASSWORD'] = os.environ['PASSENV_MYSQL']
-app.config['MYSQL_DB'] = os.environ['DBENV_MYSQL']
+app.config['MYSQL_HOST'] = os.getenv['HOSTENV_MYSQL']
+app.config['MYSQL_PORT'] = os.getenv['PORTENV_MYSQL']
+app.config['MYSQL_USER'] = os.getenv['USERENV_MYSQL']
+app.config['MYSQL_PASSWORD'] = os.getenv['PASSENV_MYSQL']
+app.config['MYSQL_DB'] = os.getenv['DBENV_MYSQL']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
-app.secret_key = os.environ['weros']
+app.secret_key = os.getenv['weros']
 
 @app.route('/')
 def home():
