@@ -3,17 +3,22 @@ const inputs = document.querySelectorAll('#formulario input');
 
 const expresiones = {
     correo: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9-._]+$/,
-    password: /^.{4,12}$/
+    password: /^.{4,12}$/,
+    nombre: /^[A-Z]{1}[a-z]+$/
 }
 
 const campos = {
     email: false,
     password: false,
-    confPassword: false
+    confPassword: false,
+    name: false
 }
 
 const validarFormulario = (e) => {
     switch(e.target.name){
+        case 'val_name':
+            validarCampo(expresiones.nombre, e.target, 'name');
+        break;
         case 'val_email':
             validarCampo(expresiones.correo, e.target, 'email');
         break;
@@ -65,7 +70,7 @@ inputs.forEach((input) => {
 
 formulario.addEventListener('submit', (e) => {
     const terminos = document.getElementById('val_terminos');
-    if(campos.email && campos.password && campos.confPassword && terminos.checked){
+    if(campos.email && campos.password && campos.confPassword && campos.name && terminos.checked){
         document.getElementById('grup_terminos').classList.remove('form_pos-incorrecto');
     }
     else{
@@ -75,6 +80,12 @@ formulario.addEventListener('submit', (e) => {
         }
         else{
             document.getElementById('grup_terminos').classList.remove('form_pos-incorrecto');
+        }
+        if(campos.name){
+            document.getElementById('grup_name').classList.remove('form_pos-incorrecto');
+        }
+        else{
+            document.getElementById('grup_name').classList.add('form_pos-incorrecto');
         }
         if(campos.email){
             document.getElementById('grup_email').classList.remove('form_pos-incorrecto');

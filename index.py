@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from flask_mysqldb import MySQL, MySQLdb
 import bcrypt
 import os
@@ -19,7 +19,7 @@ def home():
     session['signup_fail'] = False
     session['login_sux'] = True
     return render_template("home.html")
-
+    
 @app.route('/about')
 def about():
     session['signup_fail'] = False
@@ -66,6 +66,7 @@ def signup():
             session['login_sux'] = True
             return render_template("signup.html")
     else:
+        name = request.form['val_name']
         email = request.form['val_email']
         password = request.form['val_password'].encode('utf-8')
         hash_password = bcrypt.hashpw(password, bcrypt.gensalt())
@@ -82,7 +83,7 @@ def signup():
             session['signup_fail'] = False
             #REGISTRAR
             cur = mysql.connection.cursor()
-            cur.execute('INSERT INTO users (email, password) VALUES (%s, %s)', (email, hash_password))
+            cur.execute('INSERT INTO users (name, email, password) VALUES (%s, %s, %s)', (name, email, hash_password))
             mysql.connection.commit()
             return redirect(url_for('login'))
 
@@ -96,8 +97,29 @@ def profile():
 @app.route('/edit_profile', methods = ['GET', 'POST'])
 def edit_profile():
     if request.method == 'GET':
-        return render_template('edit_profile.html')
+        if 'email' in session:
+            return render_template('edit_profile.html')
+        else:
+            session['login_sux'] = True
+            return redirect(url_for('login'))
     else:
+        new_name = request.form['val_name']
+        new_email = request.form['val_email']
+        session['edit_profile_fail'] = False
+        if len(new_email) > 0:
+            if new_email != session['email']:
+                #CAMBIAR EMAIL
+                cur = mysql.connection.cursor()
+                cur.execute('UPDATE users SET email = %s WHERE users.email = %s', (new_email, session['email']))
+                mysql.connection.commit()
+                session['email'] = new_email
+        if len(new_name) > 0:
+            if new_name != session['name']:
+                #CAMBIAR NOMBRE
+                cur = mysql.connection.cursor()
+                cur.execute('UPDATE users SET name = %s WHERE users.email = %s', (new_name, session['email']))
+                mysql.connection.commit()
+                session['name'] = new_name
         return redirect(url_for('profile'))
 
 @app.route('/logout')
@@ -107,4 +129,4 @@ def logout():
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

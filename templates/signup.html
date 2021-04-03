@@ -7,6 +7,14 @@
 <form action="/signup" method="POST" class="col-md-4 mx-auto bg-light p-5 rounded-lg m-3" id="formulario">
     <h1>Registro</h1>
     <hr class="my-4">
+    <!--NOMBRE-->
+    <div class="form_pos" id="grup_name">
+        <label for="val_name" class="form-label">Nombre</label>
+        <div class="form_input">
+            <input type="text" class="form-control" name="val_name" id="val_name" placeholder="John">
+        </div>
+    </div>
+    <p class="form_input_error" id="error_name">Introduzca un nombre válido.</p>
     <!--CORREO ELECTRONICO-->
     <div class="form_pos" id="grup_email">
         <label for="val_email" class="form-label">Correo Electrónico</label>
