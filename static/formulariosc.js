@@ -67,10 +67,6 @@ formulario.addEventListener('submit', (e) => {
     const terminos = document.getElementById('val_terminos');
     if(campos.email && campos.password && campos.confPassword && terminos.checked){
         document.getElementById('grup_terminos').classList.remove('form_pos-incorrecto');
-        document.getElementById('formulario_exitoso').classList.add('formulario_exitoso-activo');
-        setTimeout(() => {
-            document.getElementById('formulario_exitoso').classList.remove('formulario_exitoso-activo');
-        }, 3000)
     }
     else{
         e.preventDefault();

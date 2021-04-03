@@ -12,5 +12,11 @@ document.addEventListener("DOMContentLoaded", function (){
         case "/signup":
             document.getElementById('signup').classList.add('active');
         break;
+        case "/profile":
+            document.getElementById('profile').classList.add('active');
+        break;
+        case "/edit_profile":
+            document.getElementById('profile').classList.add('active');
+        break;
     }
 })

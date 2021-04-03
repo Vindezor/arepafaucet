@@ -47,6 +47,7 @@ def login():
         if user != None:
             if bcrypt.hashpw(password, user['password'].encode('utf-8')) == user['password'].encode('utf-8'):
                 session['email'] = user['email']
+                session['name'] = user['name']
                 session['login_sux'] = True
                 return redirect(url_for('home'))
             else:
@@ -85,10 +86,25 @@ def signup():
             mysql.connection.commit()
             return redirect(url_for('login'))
 
+@app.route('/profile')
+def profile():
+    if 'email' in session:
+        return render_template('profile.html')
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/edit_profile', methods = ['GET', 'POST'])
+def edit_profile():
+    if request.method == 'GET':
+        return render_template('edit_profile.html')
+    else:
+        return redirect(url_for('profile'))
+
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for("home"))
+    session['login_sux'] = True
+    return redirect(url_for("login"))
 
 if __name__ == "__main__":
     app.run(debug=True)
