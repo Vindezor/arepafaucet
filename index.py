@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL, MySQLdb
 import bcrypt
 import os
@@ -35,26 +35,30 @@ def login():
             session['signup_fail'] = False
             return render_template("login.html")
     else:
+        #EXTRAER DATOS DEL FORMULARIO
         email = request.form['valog_email']
         password = request.form['valog_password'].encode('utf-8')
         hash_password = bcrypt.hashpw(password, bcrypt.gensalt())
-
+        #CONECTAR A MYSQL
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.execute('SELECT * FROM users WHERE email=%s', (email,))
+        cur.execute('SELECT * FROM users WHERE email=%s', (email,)) #SELECCIONAR DATOS DEL EMAIL DE LA TABLA
         user = cur.fetchone()
-        cur.close()
-
+        cur.close()#CERRAR CONEXION
+        #COMPROBAR SI HAY DATOS EN LA TABLA
         if user != None:
+            #COMPROBAR CONTRASEÑA
             if bcrypt.hashpw(password, user['password'].encode('utf-8')) == user['password'].encode('utf-8'):
+                #PONER DATOS EN LA SESION
                 session['email'] = user['email']
                 session['name'] = user['name']
+                session['ver_email'] = user['ver_email']
                 session['login_sux'] = True
                 return redirect(url_for('home'))
             else:
-                session['login_sux'] = False
+                session['login_sux'] = False#LOGIN FALLIDO
                 return redirect(url_for('login'))
         else:
-            session['login_sux'] = False
+            session['login_sux'] = False#LOGIN FALLIDO
             return redirect(url_for('login'))
 
 @app.route('/signup', methods = ['GET', 'POST'])
@@ -66,6 +70,7 @@ def signup():
             session['login_sux'] = True
             return render_template("signup.html")
     else:
+        #EXTRAER DATOS DEL FORMULARIO
         name = request.form['val_name']
         email = request.form['val_email']
         password = request.form['val_password'].encode('utf-8')
@@ -103,19 +108,19 @@ def edit_profile():
             session['login_sux'] = True
             return redirect(url_for('login'))
     else:
+        #EXTRAER DATOS DEL FORMULARIO
         new_name = request.form['val_name']
         new_email = request.form['val_email']
-        session['edit_profile_fail'] = False
+        #CAMBIAR EMAIL
         if len(new_email) > 0:
             if new_email != session['email']:
-                #CAMBIAR EMAIL
                 cur = mysql.connection.cursor()
                 cur.execute('UPDATE users SET email = %s WHERE users.email = %s', (new_email, session['email']))
                 mysql.connection.commit()
                 session['email'] = new_email
+        #CAMBIAR NOMBRE
         if len(new_name) > 0:
             if new_name != session['name']:
-                #CAMBIAR NOMBRE
                 cur = mysql.connection.cursor()
                 cur.execute('UPDATE users SET name = %s WHERE users.email = %s', (new_name, session['email']))
                 mysql.connection.commit()

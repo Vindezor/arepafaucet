@@ -4,6 +4,24 @@
 
 {% block content %}
 
+<!--FUNCION JAVA SCRIPT-->
+<script>
+    function ver_email(){
+        event.preventDefault();
+        swal('Verificación de email','Correo enviado, revise su correo electrónico','success',{
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        });
+    }
+    function ver_email2(){
+        event.preventDefault();
+        swal('Verificación de email','Su correo ya ha sido verificado','error',{
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        });
+    }
+</script>
+
 <div class="col-md-8 mx-auto bg-light p-5 rounded-lg m-3">
     <h1>Perfil de usuario</h1>
     <hr class="my-4">
@@ -12,9 +30,19 @@
     {% else %}
     <p class="par-p3" style="margin-bottom: 0px;"><b>Nombre: </b>No asignado</p>
     {% endif %}
-    <p class="par-p3"><b>Correo eléctronico: </b>{{ session['email'] }}</p>
+    <p class="par-p3" style="margin-bottom: 0px;"><b>Correo eléctronico: </b>{{ session['email'] }}</p>
+    {% if session['ver_email'] %}
+    <p class="par-p3"><b>Estado correo: </b>Verificado</p>
+    {% else %}
+    <p class="par-p3"><b>Estado correo: </b>Sin verificar</p>
+    {% endif %}
     <hr class="my-4">
-    <a class="btn btn-primary btn-lg" href="/edit_profile" role="button">Editar perfil</a>
+    <a class="btn btn-primary btn-lg botones-perfil" href="/edit_profile" role="button">Editar perfil</a>
+    {% if session['ver_email'] %}
+    <a class="btn btn-primary btn-lg botones-perfil" onclick=ver_email2() role="button">Verificar correo</a>
+    {% else %}
+    <a class="btn btn-primary btn-lg botones-perfil" onclick=ver_email() role="button">Verificar correo</a>
+    {% endif %}
 </div>
 
 {% endblock %}

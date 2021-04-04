@@ -25,9 +25,24 @@
     <script>
         function logout(){
             event.preventDefault();
-            swal('Cerrar sesión','Se cerrara su sesión','warning')
-            .then(() => {
-                window.location.href = "/logout";
+            swal('Cerrar sesión','Se cerrara su sesión','warning',{
+                dangerMode: true,
+                buttons: {
+                    cancel: "Cancelar",
+                    catch:{
+                        text: "Cerrar sesión",
+                        value: "logout",
+                    },
+                },
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+            })
+            .then((value) => {
+                switch(value){
+                    case "logout":
+                        window.location.href = "/logout";
+                    break;
+                }
             });
         }
     </script>

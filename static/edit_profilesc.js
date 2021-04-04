@@ -60,7 +60,10 @@ formulario.addEventListener('submit', (e) => {
     const name_va = document.getElementById('val_name');
     if(email_va.value.length == 0 && name_va.value.length == 0){
         e.preventDefault();
-        swal('Editar perfil','No se ha realizado ningun cambio','warning')
+        swal('Editar perfil','No se ha realizado ningun cambio','warning',{
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        })
             .then(() => {
                 document.getElementById('formulario').submit();
             });
@@ -69,7 +72,10 @@ formulario.addEventListener('submit', (e) => {
         if(campos.email && campos.name && terminos.checked){
             document.getElementById('grup_terminos').classList.remove('form_pos-incorrecto');
             e.preventDefault();
-            swal('Editar perfil','Se ha cambiado su perfil exitosamente','success')
+            swal('Editar perfil','Se ha cambiado su perfil exitosamente','success',{
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+            })
             .then(() => {
                 document.getElementById('formulario').submit();
             });
